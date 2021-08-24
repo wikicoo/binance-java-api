@@ -104,6 +104,15 @@ public class NewOrder {
     this(symbol, side, type, timeInForce, quantity);
     this.price = price;
   }
+  public NewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity, String price, String stopPrice) {
+    this(symbol, side, type, timeInForce, quantity, price);
+    this.stopPrice = stopPrice;
+  }
+
+  public NewOrder(String symbol, OrderSide side, OrderType type, String quoteOrderQty){
+    this(symbol, side, type, null, null);
+    this.quoteOrderQty = quoteOrderQty;
+  }
 
   public String getSymbol() {
     return symbol;
@@ -240,6 +249,10 @@ public class NewOrder {
     return new NewOrder(symbol, OrderSide.BUY, OrderType.MARKET, null, quantity);
   }
 
+  public static NewOrder marketBuyQty(String symbol, String quoteOrderQty) {
+    return new NewOrder(symbol, OrderSide.BUY, OrderType.MARKET, quoteOrderQty);
+  }
+
   /**
    * Places a MARKET sell order for the given <code>quantity</code>.
    *
@@ -265,6 +278,18 @@ public class NewOrder {
    */
   public static NewOrder limitSell(String symbol, TimeInForce timeInForce, String quantity, String price) {
     return new NewOrder(symbol, OrderSide.SELL, OrderType.LIMIT, timeInForce, quantity, price);
+  }
+
+  /**
+   * timeInForce, quantity, price, stopPrice
+   * @param symbol
+   * @param timeInForce
+   * @param quantity
+   * @param price
+   * @return
+   */
+  public static NewOrder takeProfitLimitSell(String symbol, TimeInForce timeInForce, String quantity, String price, String stopPrice) {
+    return new NewOrder(symbol, OrderSide.SELL, OrderType.TAKE_PROFIT_LIMIT, timeInForce, quantity, price, stopPrice);
   }
 
   @Override

@@ -72,6 +72,9 @@ public interface BinanceApiService {
     @GET("/api/v1/ticker/allBookTickers")
     Call<List<BookTicker>> getBookTickers();
 
+    @GET("/api/v3/ticker/bookTicker")
+    Call<BookTicker> getBookTicker(@Query("symbol") String symbol);
+
     // Account endpoints
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
@@ -113,6 +116,10 @@ public interface BinanceApiService {
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/openOrders")
     Call<List<Order>> getOpenOrders(@Query("symbol") String symbol, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @DELETE("/api/v3/openOrders")
+    Call<List<Order>> cancelOrders(@Query("symbol") String symbol, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/api/v3/allOrders")

@@ -113,6 +113,10 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	public List<BookTicker> getBookTickers() {
 		return executeSync(binanceApiService.getBookTickers());
 	}
+	@Override
+	public BookTicker getBookTicker(String symbol) {
+		return executeSync(binanceApiService.getBookTicker(symbol));
+	}
 
 	@Override
 	public NewOrderResponse newOrder(NewOrder order) {
@@ -159,6 +163,11 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
 	@Override
 	public List<Order> getOpenOrders(OrderRequest orderRequest) {
 		return executeSync(binanceApiService.getOpenOrders(orderRequest.getSymbol(), orderRequest.getRecvWindow(),
+				orderRequest.getTimestamp()));
+	}
+	@Override
+	public List<Order> cancelOrders(OrderRequest orderRequest) {
+		return executeSync(binanceApiService.cancelOrders(orderRequest.getSymbol(), orderRequest.getRecvWindow(),
 				orderRequest.getTimestamp()));
 	}
 

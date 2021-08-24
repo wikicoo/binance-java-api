@@ -4,32 +4,13 @@ import com.binance.api.client.BinanceApiAsyncRestClient;
 import com.binance.api.client.BinanceApiCallback;
 import com.binance.api.client.config.BinanceApiConfig;
 import com.binance.api.client.constant.BinanceApiConstants;
-import com.binance.api.client.domain.account.Account;
-import com.binance.api.client.domain.account.DepositAddress;
-import com.binance.api.client.domain.account.DepositHistory;
-import com.binance.api.client.domain.account.NewOrder;
-import com.binance.api.client.domain.account.NewOrderResponse;
-import com.binance.api.client.domain.account.Order;
-import com.binance.api.client.domain.account.Trade;
-import com.binance.api.client.domain.account.TradeHistoryItem;
-import com.binance.api.client.domain.account.WithdrawHistory;
-import com.binance.api.client.domain.account.WithdrawResult;
-import com.binance.api.client.domain.account.request.AllOrdersRequest;
-import com.binance.api.client.domain.account.request.CancelOrderRequest;
-import com.binance.api.client.domain.account.request.CancelOrderResponse;
-import com.binance.api.client.domain.account.request.OrderRequest;
-import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.domain.account.*;
+import com.binance.api.client.domain.account.request.*;
 import com.binance.api.client.domain.event.ListenKey;
 import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
-import com.binance.api.client.domain.market.AggTrade;
-import com.binance.api.client.domain.market.BookTicker;
-import com.binance.api.client.domain.market.Candlestick;
-import com.binance.api.client.domain.market.CandlestickInterval;
-import com.binance.api.client.domain.market.OrderBook;
-import com.binance.api.client.domain.market.TickerPrice;
-import com.binance.api.client.domain.market.TickerStatistics;
+import com.binance.api.client.domain.market.*;
 
 import java.util.List;
 
@@ -130,6 +111,10 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
   public void getBookTickers(BinanceApiCallback<List<BookTicker>> callback) {
     binanceApiService.getBookTickers().enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
+  @Override
+  public void getBookTicker(String symbol, BinanceApiCallback<BookTicker> callback) {
+    binanceApiService.getBookTicker(symbol).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
 
   @Override
   public void newOrder(NewOrder order, BinanceApiCallback<NewOrderResponse> callback) {
@@ -172,6 +157,11 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
   @Override
   public void getOpenOrders(OrderRequest orderRequest, BinanceApiCallback<List<Order>> callback) {
     binanceApiService.getOpenOrders(orderRequest.getSymbol(),
+        orderRequest.getRecvWindow(), orderRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+  @Override
+  public void cancelOrders(OrderRequest orderRequest, BinanceApiCallback<List<Order>> callback) {
+    binanceApiService.cancelOrders(orderRequest.getSymbol(),
         orderRequest.getRecvWindow(), orderRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
