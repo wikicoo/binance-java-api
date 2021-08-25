@@ -35,6 +35,11 @@ public class BinanceApiWebSocketListener<T> extends WebSocketListener {
   }
 
   @Override
+  public void onOpen(WebSocket webSocket, Response response) {
+    System.out.println("Websocket opened!" + response.message());
+  }
+
+  @Override
   public void onMessage(WebSocket webSocket, String text) {
     try {
       T event = objectReader.readValue(text);
