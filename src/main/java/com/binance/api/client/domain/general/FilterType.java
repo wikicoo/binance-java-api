@@ -19,6 +19,9 @@ public enum FilterType {
   MARKET_LOT_SIZE,
   MAX_NUM_ICEBERG_ORDERS,
   MAX_POSITION,
+  // 添加新的过滤器 TRAILING_DELTA
+  //用于限定 trailingDelta 的最大和最小值
+  TRAILING_DELTA,
 
   // Exchange
   EXCHANGE_MAX_NUM_ORDERS,
