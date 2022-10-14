@@ -142,6 +142,10 @@ public interface BinanceApiRestClient {
   List<BookTicker> getBookTickers();
 
   // Account endpoints
+  /**
+   * Get best price/qty on the order book for one symbol.
+   */
+  BookTicker getBookTicker(String symbol);
 
   /**
    * Send in a new order.
@@ -180,6 +184,12 @@ public interface BinanceApiRestClient {
    * @return a list of all account open orders on a symbol.
    */
   List<Order> getOpenOrders(OrderRequest orderRequest);
+  /**
+   * Cancel all active orders.
+   *
+   * @param orderRequest order request parameters
+   */
+  List<Order> cancelOrders(OrderRequest orderRequest);
 
   /**
    * Get all account orders; active, canceled, or filled.

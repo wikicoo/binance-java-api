@@ -29,14 +29,14 @@ public class CandlesticksCacheExample {
    * Initializes the candlestick cache by using the REST API.
    */
   private void initializeCandlestickCache(String symbol, CandlestickInterval interval) {
-    BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance();
-    BinanceApiRestClient client = factory.newRestClient();
-    List<Candlestick> candlestickBars = client.getCandlestickBars(symbol.toUpperCase(), interval);
+//    BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance();
+//    BinanceApiRestClient client = factory.newRestClient();
+//    List<Candlestick> candlestickBars = client.getCandlestickBars(symbol.toUpperCase(), interval);
 
     this.candlesticksCache = new TreeMap<>();
-    for (Candlestick candlestickBar : candlestickBars) {
-      candlesticksCache.put(candlestickBar.getOpenTime(), candlestickBar);
-    }
+//    for (Candlestick candlestickBar : candlestickBars) {
+//      candlesticksCache.put(candlestickBar.getOpenTime(), candlestickBar);
+//    }
   }
 
   /**
@@ -81,6 +81,6 @@ public class CandlesticksCacheExample {
   }
 
   public static void main(String[] args) {
-    new CandlesticksCacheExample("ETHBTC", CandlestickInterval.ONE_MINUTE);
+    new CandlesticksCacheExample("ETHBTC,BTCUSDT", CandlestickInterval.ONE_MINUTE);
   }
 }

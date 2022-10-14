@@ -167,8 +167,14 @@ public interface BinanceApiAsyncRestClient {
   void getBookTickers(BinanceApiCallback<List<BookTicker>> callback);
 
   // Account endpoints
-
   /**
+   * Get best price/qty on the order book for one symbol (asynchronous).
+   *
+   * @param callback the callback that handles the response
+   */
+    void getBookTicker(String symbol, BinanceApiCallback<BookTicker> callback);
+
+    /**
    * Send in a new order (asynchronous)
    *
    * @param order the new order to submit.
@@ -207,6 +213,13 @@ public interface BinanceApiAsyncRestClient {
    * @param callback the callback that handles the response
    */
   void getOpenOrders(OrderRequest orderRequest, BinanceApiCallback<List<Order>> callback);
+  /**
+   * Cancel all active orders (asynchronous).
+   *
+   * @param orderRequest order request parameters
+   * @param callback the callback that handles the response
+   */
+  void cancelOrders(OrderRequest orderRequest, BinanceApiCallback<List<Order>> callback);
 
   /**
    * Get all account orders; active, canceled, or filled.

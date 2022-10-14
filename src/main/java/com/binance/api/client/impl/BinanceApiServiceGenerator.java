@@ -16,6 +16,8 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -32,6 +34,7 @@ public class BinanceApiServiceGenerator {
         dispatcher.setMaxRequests(500);
         sharedClient = new OkHttpClient.Builder()
                 .dispatcher(dispatcher)
+                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 7890)))
                 .pingInterval(20, TimeUnit.SECONDS)
                 .build();
     }

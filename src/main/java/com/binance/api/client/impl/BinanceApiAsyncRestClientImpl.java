@@ -130,6 +130,10 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
   public void getBookTickers(BinanceApiCallback<List<BookTicker>> callback) {
     binanceApiService.getBookTickers().enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
+  @Override
+  public void getBookTicker(String symbol, BinanceApiCallback<BookTicker> callback) {
+    binanceApiService.getBookTicker(symbol).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
 
   @Override
   public void newOrder(NewOrder order, BinanceApiCallback<NewOrderResponse> callback) {
@@ -172,6 +176,11 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
   @Override
   public void getOpenOrders(OrderRequest orderRequest, BinanceApiCallback<List<Order>> callback) {
     binanceApiService.getOpenOrders(orderRequest.getSymbol(),
+        orderRequest.getRecvWindow(), orderRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  }
+  @Override
+  public void cancelOrders(OrderRequest orderRequest, BinanceApiCallback<List<Order>> callback) {
+    binanceApiService.cancelOrders(orderRequest.getSymbol(),
         orderRequest.getRecvWindow(), orderRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
